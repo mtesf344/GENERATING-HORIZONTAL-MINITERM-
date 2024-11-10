@@ -1,0 +1,21 @@
+from itertools import product
+class MinitermGenerator:
+ def __init__(self, predicates):
+ self.predicates = predicates
+ def generate_miniterms(self):
+ # Generate all possible combinations of True/False for each predicate
+ miniterms = list(product([True, False], repeat=len(self.predicates)))
+ 
+ # Format the result as list of dictionaries, each representing a miniterm
+ miniterm_fragments = []
+ for values in miniterms:
+ miniterm_fragment = {self.predicates[i]: values[i] for i in range(len(self.predicates))}
+ miniterm_fragments.append(miniterm_fragment)
+ 
+ return miniterm_fragments
+# Example usage
+predicates = ['P1', 'P2', 'P3']
+generator = MinitermGenerator(predicates)
+miniterms = generator.generate_miniterms()
+for i, miniterm in enumerate(miniterms, 1):
+ print(f"Miniterm {i}: {miniterm}")
